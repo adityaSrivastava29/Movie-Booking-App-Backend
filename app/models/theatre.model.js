@@ -13,7 +13,7 @@ const theatreSchema = new mongo.Schema({
   cost: {
     type: Number,
     required: [true, "Cost of per seat is required"],
-  },
+  }
 });
 
 exports.theatreDetails = mongo.model("Theatres", theatreSchema);

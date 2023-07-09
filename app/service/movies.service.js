@@ -13,7 +13,19 @@ exports.searchMovieByName = async (searchFor) => {
   if (movie === null) {
     throw new ErrorResponse("Invalid Movie name", 404);
   }
-  return movie;
+  const theatre = await getTheatreById(movie.shows[0].theatreId);
+
+  const Actors = [];
+  for (let i = 0; i < movie?.starring?.length; i++) {
+    const actor = await actors.findById(movie.starring[i]);
+    Actors.push(actor);
+  }
+  return {  
+    movie : movie,
+    theatre: theatre,
+    actors: Actors,
+  };
+
 };
 
 exports.addNewMovie = async (movie) => {
@@ -70,6 +82,7 @@ exports.bookTicket = async (movieName, bookingData, token) => {
     numberOfTickets: bookingData.numberOfTickets,
     seatNumbers: bookingData.seatNumbers,
     totalCost: totalCost,
+    dateOfBooking: bookingData.dateOfBooking,
   });
   const save = await booking.save();
   theatreDetails.theatre.showDetails.forEach((show) => {

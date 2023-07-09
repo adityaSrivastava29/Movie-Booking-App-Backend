@@ -6,7 +6,8 @@ const { logger } = require("../Configure/logger.config");
 let port = process.env.PORT || 3000;
 app.use(express.json());
 const cors = require("cors");
-app.use(cors(process.env.FRONTEND_URL));
+app.use(cors({ origin: 'http://localhost:3000' }));
+// app.use(cors(process.env.FRONTEND_URL));
 
 // Routes for the applications
 const { router } = require("./routes/application.routes");

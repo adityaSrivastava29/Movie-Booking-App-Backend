@@ -16,7 +16,12 @@ exports.getAllTheatre = asyncHandler(async (req, res) => {
 });
 
 exports.getTheatreById = asyncHandler(async (req, res) => {
-  await getTheatreById(req.params.theatreId).then((result) =>
-    res.json({ payload: result })
+  console.log("Theatre details fetched successfully " + req.params.theatreId)
+  await getTheatreById(req.params.theatreId).then((result) => {
+    //log.info("Theatre details fetched successfully" + result);
+    console.log("Theatre details fetched successfully result " + result)
+    res.json({ payload : result })
+  }
+   
   );
 });

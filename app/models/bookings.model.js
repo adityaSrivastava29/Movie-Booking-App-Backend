@@ -38,9 +38,16 @@ const bookingSchema = new mongo.Schema({
     type: Number,
     required: [true, "Total Cost is required"],
   },
+  dateOfBooking: {
+    type: Date,
+    default: Date.now,
+  },
+
 });
 
 exports.bookingModel = mongo.model("Bookings", bookingSchema);
+
+
 exports.validateBookingData = Joi.object({
   theatreId: Joi.string().required(),
   numberOfTickets: Joi.number().required(),

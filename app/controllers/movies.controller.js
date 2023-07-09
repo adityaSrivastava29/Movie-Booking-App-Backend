@@ -23,9 +23,16 @@ exports.getAllMovies = asyncHandler(async (req, res) => {
   await getAllMovies().then((result) => res.json({ payload: result }));
 });
 
+
+
+
 exports.findByName = asyncHandler(async (req, res) => {
+
   await searchMovieByName(req.params.movieName).then((result) =>
-    res.json({ payload: result })
+  {
+    return res.json({ payload: result })
+  }
+   
   );
 });
 
