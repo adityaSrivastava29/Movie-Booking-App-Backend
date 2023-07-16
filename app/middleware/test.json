@@ -1,0 +1,56 @@
+{
+  "theatre": {
+    "theatreId": "648746cd1b8ca592d3c11d20",
+    "showDetails": [
+      {
+        "showTime": "12:00",
+        "seats": 250,
+        "bookings": [
+          "64a90adb992dc42dd42dec77",
+          "64a90afe992dc42dd42dec7e",
+          "64aa71a406a3bd29bfc15b98",
+          "64ac427959e37003d9dfa44e",
+          "64ac43ce59e37003d9dfa455",
+          "64ac450a59e37003d9dfa45c",
+          "64ad88ad36b2ccda1521522f",
+          "64ad897436b2ccda15215236",
+          "64ad8abf36b2ccda1521523d",
+          "64ad8ac136b2ccda15215244",
+          "64ad8b2536b2ccda15215288",
+          "64ad91d336b2ccda1521528f",
+          "64ad91e836b2ccda15215296",
+          "64ad920936b2ccda1521529d",
+          "64ad92b136b2ccda152152a4",
+          "64ad92fd36b2ccda152152ab",
+          "64aebd411507db29523580bb"
+        ],
+        "_id": "6487c11f954577dc1e58e425"
+      }
+    ],
+    "_id": "6487c11f954577dc1e58e424"
+  },
+  "shows": {
+    "showTime": "12:00",
+    "seats": 250,
+    "bookings": [
+      "64a90adb992dc42dd42dec77",
+      "64a90afe992dc42dd42dec7e",
+      "64aa71a406a3bd29bfc15b98",
+      "64ac427959e37003d9dfa44e",
+      "64ac43ce59e37003d9dfa455",
+      "64ac450a59e37003d9dfa45c",
+      "64ad88ad36b2ccda1521522f",
+      "64ad897436b2ccda15215236",
+      "64ad8abf36b2ccda1521523d",
+      "64ad8ac136b2ccda15215244",
+      "64ad8b2536b2ccda15215288",
+      "64ad91d336b2ccda1521528f",
+      "64ad91e836b2ccda15215296",
+      "64ad920936b2ccda1521529d",
+      "64ad92b136b2ccda152152a4",
+      "64ad92fd36b2ccda152152ab",
+      "64aebd411507db29523580bb"
+    ],
+    "_id": "6487c11f954577dc1e58e425"
+  }
+}

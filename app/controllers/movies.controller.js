@@ -15,9 +15,16 @@ const {
   getActorById,
   getAllBookings,
   getBookedSeats,
-  deleteBooking,
+  deleteBooking
 } = require("../service/movies.service");
+
+
 const ErrorResponse = require("../utils/ErrorResponse");
+
+exports.deleteBooking = asyncHandler(async (req, res) => {
+  const auth = req.header("Authorization");
+   await deleteBooking(req.params.bookingId).then((result) => res.json({ payload: result }));
+});
 
 exports.getAllMovies = asyncHandler(async (req, res) => {
   await getAllMovies().then((result) => res.json({ payload: result }));
@@ -56,14 +63,14 @@ exports.bookTicket = asyncHandler(async (req, res, next) => {
   const { error } = validateBookingData.validate(req.body);
   if (error) {
     return next(new ErrorResponse(error.message, 400));
-  }
+  }      
   await bookTicket(
     req.params.movieName,
     req.body,
     req.header("Authorization")
   ).then((result) => {
     res.status(201).json({ payload: result });
-  });
+  });  
 });
 
 exports.deleteMovie = asyncHandler(async (req, res) => {
@@ -121,6 +128,4 @@ exports.getBookedSeats = asyncHandler(async (req, res) => {
   ).then((result) => res.json({ payload: result }));
 });
 
-exports.deleteBooking = asyncHandler(async (req, res) => {
-   await deleteBooking(req.params.bookingId).then((result) => res.json({ payload: result }));
-});
+

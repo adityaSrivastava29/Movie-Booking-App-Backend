@@ -41,6 +41,7 @@ const bookingSchema = new mongo.Schema({
   dateOfBooking: {
     type: Date,
     default: Date.now,
+    required: [true, "Date of Booking is required"],
   },
 
 });
@@ -55,4 +56,5 @@ exports.validateBookingData = Joi.object({
     .pattern(new RegExp("([01]?[0-9]|2[0-3]):[0-5][0-9]"))
     .required(),
   seatNumbers: Joi.array().length(Joi.ref("numberOfTickets")).required(),
+  dateOfBooking: Joi.date().required(),
 });

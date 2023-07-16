@@ -20,12 +20,11 @@ exports.searchMovieByName = async (searchFor) => {
     const actor = await actors.findById(movie.starring[i]);
     Actors.push(actor);
   }
-  return {  
-    movie : movie,
+  return {
+    movie: movie,
     theatre: theatre,
     actors: Actors,
   };
-
 };
 
 exports.addNewMovie = async (movie) => {
@@ -59,16 +58,22 @@ exports.getAllActors = async () => {
 exports.bookTicket = async (movieName, bookingData, token) => {
   const userId = validateToken(token.slice(7));
   const movieModel = await getMovieDetails(movieName, bookingData.theatreId);
+  console.log("movieModel--------" + JSON.stringify(movieModel));
   const theatreDetails = getTheatreDetails(
     movieModel,
     bookingData.theatreId,
     bookingData.showTime
   );
+  console.log("bookingData--------" + JSON.stringify(bookingData));
+  console.log("theatreDetails--------" + JSON.stringify(theatreDetails));
   const afterBooking =
     bookingData.numberOfTickets + theatreDetails.shows.bookings.length;
-  if (afterBooking > theatreDetails.shows.seats) {
-    throw new ErrorResponse("No Seats Available", 400);
-  }
+    console.log("afterBooking--------" + afterBooking);
+    console.log("theatreDetails.shows.bookings.length--------" + theatreDetails.shows.bookings.length);
+    console.log("theatreDetails.shows.seats--------" + theatreDetails.shows.seats);
+  // if (afterBooking > theatreDetails.shows.seats) {
+  //   throw new ErrorResponse("No Seats Available", 400);
+  // }
 
   const totalCost =
     (await getTheatreById(bookingData.theatreId)).cost *
@@ -99,6 +104,19 @@ exports.bookTicket = async (movieName, bookingData, token) => {
     bookingDetails: save,
   };
 };
+
+exports.deleteBooking = async (bookingId) => {
+  const booking = await bookingModel.findById(bookingId);
+  if (booking === null) {
+    throw new ErrorResponse("Invalid Booking Id", 404);
+  }
+  await bookingModel.findByIdAndDelete(bookingId);
+  return {
+         bookingId: bookingId,
+         message: `${bookingId} is deleted successfully`
+        };
+};
+
 
 exports.addTheatreSeats = async (
   theatreId,
@@ -159,7 +177,19 @@ exports.deleteMovie = async (movieName) => {
 exports.getMyBookings = async (token) => {
   const userId = validateToken(token.slice(7));
   const bookings = await bookingModel.find({ userId: userId });
-  return bookings;
+  const result = [];
+  const mybooking = {
+    booking: {},
+    theatreName: {},
+  };
+
+  for (let i = 0; i < bookings.length; i++) {
+    const theatre = await getTheatreById(bookings[i].theatreId);
+    result.push({ booking: bookings[i],
+    theatreName: theatre.theatreName});
+   
+  }
+  return result;
 };
 
 exports.getActorById = async (actorId) => {
@@ -187,12 +217,14 @@ async function getMovieDetails(movieName, theatreId) {
 }
 
 function getTheatreDetails(movieModel, theatreId, showTime) {
+ 
   const theatreDetails = movieModel.shows.find(
     (show) => show.theatreId.toString() === theatreId
   );
   const showTimeDetails = theatreDetails?.showDetails.find(
     (theatre) => showTime === theatre.showTime
   );
+  console.log("showTimeDetails--------" + JSON.stringify(showTimeDetails));
   if (showTimeDetails === undefined) {
     throw new ErrorResponse("Invalid Show Timing", 400);
   }

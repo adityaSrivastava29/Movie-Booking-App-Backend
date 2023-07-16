@@ -23,6 +23,7 @@ const {
   getActorById,
   getAllBookings,
   getBookedSeats,
+  deleteBooking,
 } = require("../controllers/movies.controller");
 const {
   addNewTheatre,
@@ -78,6 +79,7 @@ router.get("/all-theatre", getAllTheatre);
 //Booking route
 //  authenticate, is used to authenticate the user
 router.post("/:movieName/add", authenticate, bookTicket);
+router.delete("/delete/:bookingId", authenticate, deleteBooking);
 router.get("/my-bookings", authenticate, getMyBookings);
 router.get("/all-bookings", authenticateAdmin, getAllBookings);
 router.delete("/:movieName/delete", authenticateAdmin, deleteMovie);
