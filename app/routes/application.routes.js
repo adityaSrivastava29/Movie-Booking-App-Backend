@@ -41,8 +41,12 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.post("/logout", logoutUser);
 router.get("/validate", validateToken);
-router.get("/:username/forgot", forgotPassword);
-router.put("/:resetToken/reset", resetPassword);
+router.get("/forgot/:username", forgotPassword);
+router.put("/reset", resetPassword);
+
+
+
+
 router.get("/admin-access/:loginId", authenticateAdmin, giveAdminAccess);
 
 router.get("/admin-access/test/:loginId", giveAdminAccess);

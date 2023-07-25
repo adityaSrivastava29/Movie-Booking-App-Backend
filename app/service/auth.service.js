@@ -50,8 +50,11 @@ exports.forgotPassword = async (username) => {
 
 exports.resetPassword = async (resetToken, newPassword) => {
   const decoded = jwt.verify(resetToken, process.env.RESET_TOKEN_KEY);
+  console.log("decoded -->", decoded);
   const user = await userData.findOne({ loginId: decoded.username });
+  console.log("user -->", user);
   const match = await bcrypt.compare(newPassword, user.password);
+   console.log("match -->", match);
   if (match) {
     throw new ErrorResponse("Password can not be same as previous", 400);
   }

@@ -48,11 +48,12 @@ exports.logoutUser = asyncHandler(async (req, res) => {
 });
 
 exports.resetPassword = asyncHandler(async (req, res, next) => {
-  const { error } = validateResetPassword.validate(req.body);
-  if (error) {
-    return next(new ErrorResponse(error.message, 400));
-  }
-  await resetPassword(req.params.resetToken, req.body.password).then(
+  // const { error } = validateResetPassword.validate(req.body);
+  // if (error) {
+  //   return next(new ErrorResponse(error.message, 400));
+  // }
+  console.log("req.body.resetToken -->", req.body.resetToken);
+  await resetPassword(req.body.resetToken, req.body.password).then(
     (result) => {
       res.status(204).json({ payload: result });
     }

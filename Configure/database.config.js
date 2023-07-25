@@ -3,7 +3,7 @@ const { logger } = require("./logger.config");
 
 let mongoConnectUrl;
 if (process.env.ENV === "development") {
-  mongoConnectUrl = `${process.env.DB_URL}/moviebookingapp_db`;
+  mongoConnectUrl = `${process.env.DB_URL}moviebookingapp_db`;
 } else if (process.env.ENV === "test") {
   mongoConnectUrl = `${process.env.DB_TEST_URL}`;
 }
